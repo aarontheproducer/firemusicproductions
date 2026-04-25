@@ -8,9 +8,9 @@
 <style>
 
 body{
-    background:#0f0f0f;
-    color:white;
-    font-family:Arial, Helvetica, sans-serif;
+    background:#000080; /* classic blue */
+    color:#00ff00; /* neon green */
+    font-family:"Courier New", Courier, monospace;
     margin:0;
     text-align:center;
 }
@@ -18,68 +18,86 @@ body{
 .container{
     max-width:900px;
     margin:auto;
-    padding:40px 20px;
+    padding:30px 10px;
 }
 
+/* BACK BUTTON */
+
 .back{
-    margin-bottom:30px;
+    margin-bottom:20px;
 }
 
 .back button{
-    padding:10px 20px;
-    background:#1e1e1e;
-    border:1px solid #333;
-    color:white;
+    padding:6px 14px;
+    background:#c0c0c0;
+    border:2px outset #fff;
+    color:#000;
+    font-family:inherit;
     cursor:pointer;
 }
 
 .back button:hover{
-    background:#333;
+    background:#a0a0a0;
 }
 
+/* ARTIST */
+
 .artist-img{
-    width:250px;
-    margin-bottom:20px;
+    width:200px;
+    margin-bottom:15px;
+    border:2px solid #00ff00;
 }
 
 .artist-name{
-    font-size:40px;
-    margin-bottom:20px;
+    font-size:32px;
+    margin-bottom:15px;
+    color:#ffff00;
+    text-transform:uppercase;
 }
+
+/* BIO */
 
 .bio{
     max-width:600px;
     margin:auto;
     color:#cccccc;
+    font-size:13px;
 }
 
+/* SECTION */
+
 .section{
-    margin-top:60px;
+    margin-top:40px;
 }
+
+/* LINKS */
 
 .links a{
     display:inline-block;
-    margin:10px;
+    margin:8px;
 }
 
 .links button{
-    padding:10px 20px;
-    background:#1e1e1e;
-    border:1px solid #333;
-    color:white;
+    padding:6px 14px;
+    background:#c0c0c0;
+    border:2px outset #fff;
+    color:#000;
+    font-family:inherit;
     cursor:pointer;
 }
 
 .links button:hover{
-    background:#333;
+    background:#a0a0a0;
 }
 
+/* RELEASE LIST */
+
 .release{
-    margin-top:15px;
+    margin-top:10px;
 }
 
 .release a{
-    color:white;
+    color:#00ff00;
     text-decoration:none;
 }
 
@@ -87,58 +105,65 @@ body{
     text-decoration:underline;
 }
 
+/* FOOTER */
+
 footer{
-    margin-top:100px;
-    padding:30px;
-    border-top:1px solid #222;
-    color:#888;
+    margin-top:60px;
+    padding:20px;
+    border-top:3px double #00ff00;
+    color:#00ff00;
+    font-size:12px;
 }
+
+/* RELEASE CARD */
+
 .release-card{
-    display:flex;
-    align-items:center;
-    gap:15px;
-    background:#1a1a1a;
-    border:1px solid #333;
-    padding:12px;
-    margin:15px 0;
+    display:block;
+    background:#000;
+    border:2px solid #00ff00;
+    padding:10px;
+    margin:10px auto;
     text-decoration:none;
-    color:white;
-    max-width:600px;
+    color:#00ff00;
+    max-width:500px;
 }
 
 .release-card:hover{
-    background:#222;
+    background:#001a00;
 }
 
+/* COVER */
+
 .cover-box{
-    width:110px;
-    height:110px;
-    flex-shrink:0;
+    width:100px;
+    height:100px;
     overflow:hidden;
-    border-radius:10px;
+    border:2px solid #00ff00;
+    margin-bottom:8px;
 }
 
 .cover-box img{
     width:100%;
     height:100%;
     object-fit:cover;
-    object-position:center;
 }
 
+/* TEXT */
+
 .release-info{
-    text-align:left;
+    text-align:center;
 }
 
 .title{
-    font-size:18px;
+    font-size:14px;
     font-weight:bold;
-    margin-bottom:6px;
+    margin-bottom:4px;
 }
 
 .meta{
-    font-size:13px;
-    color:#bbb;
-    line-height:1.4;
+    font-size:11px;
+    color:#cccccc;
+    line-height:1.3;
 }
 
 </style>

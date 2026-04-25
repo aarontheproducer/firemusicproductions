@@ -8,62 +8,80 @@
 <style>
 
 body{
-    background:#0f0f0f;
-    color:white;
-    font-family:Arial, Helvetica, sans-serif;
+    background:#000080; /* classic blue */
+    color:#00ff00; /* neon green */
+    font-family:"Courier New", Courier, monospace;
     margin:0;
     text-align:center;
 }
 
 h1{
-    margin-top:40px;
+    margin-top:30px;
+    font-size:28px;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    color:#ffff00;
 }
+
+/* GRID → old-school layout */
 
 .artist-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:30px;
-    max-width:1000px;
-    margin:50px auto;
+    max-width:900px;
+    margin:30px auto;
 }
 
+/* ARTIST BLOCK */
+
+.artist{
+    display:inline-block;
+    width:200px;
+    vertical-align:top;
+    margin:10px;
+    padding:10px;
+    background:#000;
+    border:2px solid #00ff00;
+}
+
+/* IMAGE */
+
 .img-box{
-    width:90px;
-    height:90px;
+    width:80px;
+    height:80px;
     overflow:hidden;
-    border-radius:10px;
-    margin:auto;
+    border:2px solid #00ff00;
+    margin:0 auto 10px auto;
 }
 
 .img-box img{
     width:100%;
     height:100%;
     object-fit:cover;
-    object-position:center;
 }
 
-.artist img{
-    width:100%;
-}
+/* BUTTON */
 
 .artist button{
-    margin-top:15px;
-    padding:10px 20px;
-    background:#1e1e1e;
-    border:1px solid #333;
-    color:white;
+    margin-top:10px;
+    padding:6px 14px;
+    background:#c0c0c0;
+    border:2px outset #fff;
+    color:#000;
+    font-family:inherit;
     cursor:pointer;
 }
 
 .artist button:hover{
-    background:#333;
+    background:#a0a0a0;
 }
 
+/* FOOTER */
+
 footer{
-    margin-top:80px;
-    padding:25px;
-    border-top:1px solid #222;
-    color:#888;
+    margin-top:40px;
+    padding:15px;
+    border-top:3px double #00ff00;
+    color:#00ff00;
+    font-size:12px;
 }
 
 </style>
