@@ -136,10 +136,27 @@ footer{
     color:#00ff00;
     font-size:12px;
 }
+    /* Two-column layout */
+.releases-container{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    margin:40px 20px;
+}
+
+.releases-column{
+    width:48%;
+}
+
+/* News section full width */
+.news-section{
+    margin:40px 20px;
+    border:2px dashed #00ff00;
+    padding:15px;
+}
 
 </style>
 </head>
-
 
 <body>
 
@@ -165,71 +182,89 @@ footer{
 </header>
 
 
-<div class="section">
+<div class="releases-container">
 
-<h2>Recent Releases</h2>
+  <!-- LEFT: Recent Releases -->
+  <div class="section releases-column">
 
-<a href="BACKFLIP.html" class="release-card">
+    <h2>Recent Releases</h2>
 
-  <div class="cover-box">
-    <img src="https://bl-prod-images.azureedge.net/v1.3/albums/12f4672e-d86e-406b-a0c0-a3db43c6da99/200x200">
+    <a href="BACKFLIP.html" class="release-card">
+
+      <div class="cover-box">
+        <img src="https://bl-prod-images.azureedge.net/v1.3/albums/12f4672e-d86e-406b-a0c0-a3db43c6da99/200x200">
+      </div>
+
+      <div class="release-info">
+        <div class="title">BACKFLIP</div>
+        <div class="meta">
+          Artist: Aaron The Producer<br>
+          Release Date: 2026-3-31<br>
+          Type: Album<br>
+        </div>
+      </div>
+
+    </a>
+
+    <a href="saint Patrick's world.html" class="release-card">
+
+      <div class="cover-box">
+        <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUDZo2G9-0Y3haVyBQvucqhsRv6UIOTcPBz1T5Fi6tddhWaJ1r25F_sgUPzdiMg-64CEkzr3uIOb2gL59IEEvOMWGQsDpkt4hqaFL-8U3NhLdQ3xFMLpj079yPiPdlQaCsARydynNBS81DL-_crQ_A_ria0ybC9hm0EZF_aEKxJyt3ICtSv73XQ_ch3md5j_lMN6AqqWURWJuEi5jBaAjTgc458eeZxvSXINmRg=w1280">
+      </div>
+
+      <div class="release-info">
+        <div class="title">saint Patrick's world</div>
+        <div class="meta">
+          Artist: Nikoraps2983<br>
+          Release Date: 2026-3-17<br>
+          Type: Album<br>
+          Runtime: 8:03
+        </div>
+      </div>
+
+    </a>
+
+    <a href="2026EP.html" class="release-card">
+
+      <div class="cover-box">
+        <img src="https://bl-prod-images.azureedge.net/v1.3/albums/1e42db08-70f5-412b-8e8a-a618757be42c/200x200">
+      </div>
+
+      <div class="release-info">
+        <div class="title">2026 EP</div>
+        <div class="meta">
+          Artist: Aaron The Producer<br>
+          Release Date: 2026-01-01<br>
+          Type: EP<br>
+          Runtime: 12:00
+        </div>
+      </div>
+
+    </a>
+
   </div>
 
-  <div class="release-info">
+  <!-- RIGHT: Upcoming Releases -->
+  <div class="section releases-column">
 
-    <div class="title">BACKFLIP</div>
+    <h2>Upcoming Releases</h2>
 
-    <div class="meta">
-    Artist: Aaron The Producer<br>
-      Release Date: 2026-3-31<br>
-      Type: Album<br>
+    <div class="releases-placeholder">
+      No upcoming releases yet.
     </div>
 
   </div>
 
-</a>
+</div>
 
-<a href="saint Patrick's world.html" class="release-card">
 
-  <div class="cover-box">
-    <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUDZo2G9-0Y3haVyBQvucqhsRv6UIOTcPBz1T5Fi6tddhWaJ1r25F_sgUPzdiMg-64CEkzr3uIOb2gL59IEEvOMWGQsDpkt4hqaFL-8U3NhLdQ3xFMLpj079yPiPdlQaCsARydynNBS81DL-_crQ_A_ria0ybC9hm0EZF_aEKxJyt3ICtSv73XQ_ch3md5j_lMN6AqqWURWJuEi5jBaAjTgc458eeZxvSXINmRg=w1280">
+<div class="news-section">
+
+  <h2>News</h2>
+
+  <div class="releases-placeholder">
+    No news yet.
   </div>
-
-  <div class="release-info">
-
-    <div class="title">saint Patrick's world</div>
-
-    <div class="meta">
-    Artist: Nikoraps2983<br>
-      Release Date: 2026-3-17<br>
-      Type: Album<br>
-      Runtime: 8:03
-    </div>
-
-  </div>
-
-</a>
-
-<a href="2026EP.html" class="release-card">
-
-  <div class="cover-box">
-    <img src="https://bl-prod-images.azureedge.net/v1.3/albums/1e42db08-70f5-412b-8e8a-a618757be42c/200x200">
-  </div>
-
-  <div class="release-info">
-
-    <div class="title">2026 EP</div>
-
-    <div class="meta">
-    Artist: Aaron The Producer<br>
-      Release Date: 2026-01-01<br>
-      Type: EP<br>
-      Runtime: 12:00
-    </div>
-
-  </div>
-
-</a>
 
 </div>
 
