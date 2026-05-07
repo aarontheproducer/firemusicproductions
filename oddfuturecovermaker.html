@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Odd Future Cover Generator</title>
+
+<style>
+  body {
+    background:#111;
+    color:white;
+    font-family: Arial, sans-serif;
+    display:flex;
+    gap:20px;
+    padding:20px;
+  }
+
+  .controls {
+    width:300px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+
+  input, select, button {
+    padding:8px;
+    border-radius:6px;
+    border:none;
+  }
+
+  canvas {
+    border:2px solid #333;
+  }
+
+  button {
+    cursor:pointer;
+    background:#00ff99;
+    font-weight:bold;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="controls">
+  <h3>Cover Controls</h3>
+
+  <input id="text" placeholder="Album Title" value="Odd Future Type Beat" />
+
+  <label>Text Color</label>
+  <input id="color" type="color" value="#ffffff" />
+
+  <label>Text Transparency</label>
+  <input id="opacity" type="range" min="0" max="1" step="0.05" value="1" />
+
+  <label>Text Size</label>
+  <input id="textSize" type="range" min="20" max="200" value="70" />
+
+  <label>Outline Size</label>
+  <input id="outlineSize" type="range" min="0" max="400" value="12" />
+
+  <label>Grain (Background Only)</label>
+  <input id="grain" type="range" min="0" max="200" value="40" />
+
+  <label>Parental Advisory Size</label>
+  <input id="paSize" type="range" min="50" max="200" value="120" />
+
+  <label>Parental Advisory Position</label>
+  <select id="paPos">
+    <option value="bl">Bottom Left</option>
+    <option value="br">Bottom Right</option>
+    <option value="tl">Top Left</option>
+    <option value="tr">Top Right</option>
+  </select>
+
+  <button onclick="newImage()">Random Image</button>
+  <button onclick="render()">Generate Cover</button>
+  <button onclick="downloadImage()">Download</button>
+</div>
+
+<canvas id="canvas" width="800" height="800"></canvas>
+
+<script>
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+let bgImage = new Image();
+bgImage.crossOrigin = "anonymous";
+
+const paImg = new Image();
+paImg.crossOrigin = "anonymous";
+paImg.src =
+"https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Parental_Advisory_label.svg/500px-Parental_Advisory_label.svg.png";
+
+// random image
+function newImage() {
+  const url = "https://picsum.photos/800?random=" + Date.now();
+  bgImage = new Image();
+  bgImage.crossOrigin = "anonymous";
+  bgImage.src = url;
+  bgImage.onload = render;
+}
+
+// make cover-fit image
+function drawCover(ctx, img) {
+  const scale = Math.max(canvas.width / img.width, canvas.height / img.height);
+  const x = (canvas.width / 2) - (img.width / 2) * scale;
+  const y = (canvas.height / 2) - (img.height / 2) * scale;
+  ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
+}
+
+// grain effect ONLY on background
+function applyGrain(sourceCanvas, amount) {
+  if (amount <= 0) return sourceCanvas;
+
+  const gCanvas = document.createElement("canvas");
+  gCanvas.width = sourceCanvas.width;
+  gCanvas.height = sourceCanvas.height;
+
+  const gCtx = gCanvas.getContext("2d");
+  gCtx.drawImage(sourceCanvas, 0, 0);
+
+  const imgData = gCtx.getImageData(0, 0, gCanvas.width, gCanvas.height);
+  const data = imgData.data;
+
+  const strength = amount / 255;
+
+  for (let i = 0; i < data.length; i += 4) {
+    const noise = (Math.random() - 0.5) * 255 * strength;
+
+    data[i] += noise;
+    data[i+1] += noise;
+    data[i+2] += noise;
+  }
+
+  gCtx.putImageData(imgData, 0, 0);
+  return gCanvas;
+}
+
+// text
+function drawText() {
+  const text = document.getElementById("text").value;
+  const color = document.getElementById("color").value;
+  const opacity = document.getElementById("opacity").value;
+  const size = document.getElementById("textSize").value;
+  const outline = document.getElementById("outlineSize").value;
+
+  ctx.save();
+  ctx.globalAlpha = opacity;
+
+  ctx.font = `bold ${size}px 'Cooper Black', Impact, serif`;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+
+  const x = canvas.width / 2;
+  const y = canvas.height / 2;
+
+  // outline (fixed style but scalable size)
+  ctx.lineWidth = outline;
+  ctx.strokeStyle = "black";
+  ctx.strokeText(text, x, y);
+
+  ctx.fillStyle = color;
+  ctx.fillText(text, x, y);
+
+  ctx.restore();
+}
+
+// parental advisory
+function drawPA() {
+  const size = parseInt(document.getElementById("paSize").value);
+  const pos = document.getElementById("paPos").value;
+
+  let x = 10, y = 10;
+
+  if (pos === "br") { x = 800 - size - 10; y = 800 - size - 10; }
+  if (pos === "bl") { x = 10; y = 800 - size - 10; }
+  if (pos === "tr") { x = 800 - size - 10; y = 10; }
+  if (pos === "tl") { x = 10; y = 10; }
+
+  ctx.drawImage(paImg, x, y, size, size);
+}
+
+// render everything
+function render() {
+  if (!bgImage.src) return;
+
+  const grainAmount = parseInt(document.getElementById("grain").value);
+
+  // OFFSCREEN canvas for background only
+  const tempCanvas = document.createElement("canvas");
+  tempCanvas.width = 800;
+  tempCanvas.height = 800;
+  const tctx = tempCanvas.getContext("2d");
+
+  drawCover(tctx, bgImage);
+
+  const grainBG = applyGrain(tempCanvas, grainAmount);
+
+  // draw final background
+  ctx.clearRect(0, 0, 800, 800);
+  ctx.drawImage(grainBG, 0, 0);
+
+  // overlays
+  drawText();
+  drawPA();
+}
+
+function downloadImage() {
+  const link = document.createElement("a");
+  link.download = "odd-future-cover.png";
+  link.href = canvas.toDataURL("image/png");
+  link.click();
+}
+
+// init
+newImage();
+</script>
+
+</body>
+</html>
